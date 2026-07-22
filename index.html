@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Umesh Khola - Resume Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+  scroll-behavior:smooth;
+}
+
+:root{
+  --primary:#1e7bbf;
+  --accent:#e91e63;
+  --bg:#0f172a;
+  --text:#ffffff;
+  --muted:#cbd5e1;
+  --card:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.14);
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  position:relative;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  width:700px;
+  height:700px;
+  background:radial-gradient(circle,var(--primary),transparent 70%);
+  top:-220px;
+  left:-200px;
+  filter:blur(120px);
+  animation:moveGlow 12s infinite alternate ease-in-out;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  width:520px;
+  height:520px;
+  background:radial-gradient(circle,var(--accent),transparent 70%);
+  bottom:-170px;
+  right:-150px;
+  filter:blur(120px);
+  z-index:-2;
+}
+
+@keyframes moveGlow{
+  from{ transform:translate(0,0); }
+  to{ transform:translate(200px,150px); }
+}
+
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+.gradient-text{
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.section-title{
+  font-size:clamp(1.8rem, 4vw, 3rem);
+  font-weight:800;
+  margin-bottom:14px;
+  text-align:center;
+}
+
+.section-subtitle{
+  color:var(--muted);
+  max-width:800px;
+  text-align:center;
+  line-height:1.8;
+  font-size:1rem;
+}
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 20px;
+  background:rgba(15,23,42,0.62);
+  backdrop-filter:blur(14px);
+  z-index:1000;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,0.28);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  background:rgba(255,255,255,0.04);
+}
+
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.nav-title{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:800;
+  letter-spacing:1px;
+  font-size:clamp(16px, 4vw, 28px);
+  white-space:nowrap;
+  max-width:60%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  text-align:center;
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.menu-toggle{
+  position:relative;
+  width:30px;
+  height:3px;
+  background:white;
+  cursor:pointer;
+  transition: all 0.25s;
+  z-index:1001;
+}
+
+.menu-toggle::before,
+.menu-toggle::after{
+  content:"";
+  position:absolute;
+  width:30px;
+  height:3px;
+  background:white;
+  transition: all 0.25s;
+  left:0;
+}
+
+.menu-toggle::before{ top:-10px; }
+.menu-toggle::after{ top:10px; }
+
+.menu-toggle:hover{
+  background:rgba(255,255,255,0.9);
+}
+.menu-toggle:hover::before{ top:-12px; }
+.menu-toggle:hover::after{ top:12px; }
+
+.menu-toggle.active{
+  transform:rotate(180deg);
+  background:transparent;
+}
+.menu-toggle.active::before{
+  top:0;
+  transform:rotate(45deg);
+}
+.menu-toggle.active::after{
+  top:0;
+  transform:rotate(-45deg);
+}
+
+nav ul{
+  position:absolute;
+  top:70px;
+  right:0;
+  width:min(240px, 82vw);
+  background:#0f172a; 
+  border-left:2px solid rgba(255,255,255,0.1);
+  box-shadow:-10px 0 30px rgba(0,0,0,0.6);
+  flex-direction:column;
+  padding:25px 20px;
+  border-radius:0;
+  transform:translateX(110%);
+  transition:0.4s ease;
+}
+
+nav ul.active{
+  transform:translateX(0) scale(1);
+}
+
+nav ul li{
+  list-style:none;
+  opacity:0;
+  transform:translateY(-10px);
+  transition:0.4s ease;
+  margin-top:18px;
+}
+
+nav ul li.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+nav ul li a{
+  background:linear-gradient(45deg,#00eaff,#ff2fd1);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  font-weight:700;
+  text-shadow:0 0 10px rgba(255,255,255,0.2);
+}
+
+nav ul li a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:4px;
+  width:0%;
+  height:2px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+  transition:0.35s ease;
+}
+
+nav ul li a:hover::after{
+  width:100%;
+}
+
+main{
+  width:100%;
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:120px 20px 80px;
+  opacity:0;
+  transform:translateY(40px);
+  transition:0.8s ease;
+}
+
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.hero{
+  padding-top:140px;
+}
+
+.hero-wrap{
+  width:min(1150px, 100%);
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap:30px;
+  align-items:center;
+  text-align:left;
+}
+
+.hero-left{
+  padding:24px;
+}
+
+.hero-badge{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.12);
+  background:rgba(255,255,255,0.04);
+  color:var(--muted);
+  margin-bottom:16px;
+  font-size:0.92rem;
+}
+
+.hero h2{
+  font-size:clamp(2.4rem, 6vw, 4.9rem);
+  line-height:1.05;
+  font-weight:800;
+}
+
+.hero p{
+  max-width:620px;
+  margin-top:18px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:1rem;
+}
+
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:28px;
+}
+
+.btn{
+  padding:12px 22px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(30,123,191,0.45);
+  transition:0.35s ease;
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:160px;
+}
+
+.btn:hover{
+  transform:translateY(-3px) scale(1.03);
+  box-shadow:0 0 25px rgba(233,30,99,0.5);
+}
+
+.btn.secondary{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.22);
+  box-shadow:none;
+}
+
+.btn.secondary:hover{
+  border-color:var(--accent);
+  color:#fff;
+}
+
+.hero-right{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:24px;
+}
+
+.profile-card{
+  width:min(100%, 360px);
+  background:linear-gradient(145deg, rgba(30,123,191,0.14), rgba(233,30,99,0.1));
+  border:1px solid var(--border);
+  backdrop-filter:blur(8px);
+  border-radius:28px;
+  padding:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.25);
+}
+
+.photo-frame{
+  width:150px;
+  height:180px;
+  margin:0 auto 18px;
+  border-radius:16px;
+  overflow:hidden;
+  border:3px solid rgba(255,255,255,0.35);
+  box-shadow:0 0 25px rgba(30,123,191,0.25);
+  background:rgba(255,255,255,0.05);
+}
+
+.photo-frame img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+}
+
+.profile-name{
+  font-size:1.35rem;
+  font-weight:800;
+  text-align:center;
+  margin-top:6px;
+}
+
+.profile-role{
+  text-align:center;
+  color:var(--muted);
+  font-size:0.95rem;
+  margin-top:6px;
+}
+
+.info-grid{
+  width:min(1150px, 100%);
+  display:grid;
+  grid-template-columns:repeat(2, 1fr);
+  gap:22px;
+  margin-top:34px;
+}
+
+.info-card{
+  background:linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:24px;
+  text-align:left;
+  box-shadow:0 12px 40px rgba(0,0,0,0.18);
+}
+
+.info-card h3{
+  font-size:1.25rem;
+  font-weight:800;
+  margin-bottom:14px;
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.info-card p,
+.info-card li{
+  color:var(--muted);
+  line-height:1.8;
+  font-size:0.98rem;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.detail-list{
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+
+.detail-list li{
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+.cards{
+  display:flex;
+  gap:22px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:32px;
+  width:min(1150px, 100%);
+}
+
+.card{
+  width:min(100%, 270px);
+  min-height:220px;
+  background:linear-gradient(145deg, rgba(30,123,191,0.14), rgba(233,30,99,0.08));
+  border:1px solid var(--border);
+  backdrop-filter:blur(6px);
+  border-radius:22px;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  transition:0.35s ease;
+  color:#e2e8f0;
+  box-shadow:0 12px 35px rgba(0,0,0,0.16);
+}
+
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+  border-color:rgba(255,255,255,0.22);
+}
+
+.card .year{
+  display:inline-block;
+  margin-top:10px;
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,0.08);
+  font-size:0.86rem;
+  color:var(--muted);
+}
+
+.timeline{
+  width:min(900px,100%);
+  margin-top:34px;
+  display:grid;
+  gap:18px;
+}
+
+.timeline-item{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:18px;
+  align-items:stretch;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:18px;
+  text-align:left;
+}
+
+.timeline-year{
+  border-radius:16px;
+  padding:14px 12px;
+  text-align:center;
+  font-weight:800;
+  background:linear-gradient(45deg, rgba(30,123,191,0.25), rgba(233,30,99,0.18));
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.timeline-content h4{
+  font-size:1.08rem;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.timeline-content p{
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.skills-grid{
+  width:min(1150px, 100%);
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:18px;
+  margin-top:34px;
+}
+
+.skill-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:22px;
+  text-align:left;
+  min-height:170px;
+}
+
+.skill-box h4{
+  margin-bottom:12px;
+  font-size:1.05rem;
+  background:linear-gradient(45deg,var(--primary),var(--accent));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.skill-box p,
+.skill-box li{
+  color:var(--muted);
+  line-height:1.8;
+  font-size:0.96rem;
+}
+
+.skill-box ul{
+  padding-left:18px;
+}
+  
+.signature-block{
+  margin-top:25px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+}
+
+.sign-name{
+  margin-top:8px;
+  font-weight:700;
+  color:#fff;
+}
+  
+.declaration{
+  width:min(900px,100%);
+  margin-top:32px;
+  background:linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:22px;
+  padding:24px;
+  text-align:left;
+}
+
+.declaration p{
+  color:var(--muted);
+  line-height:1.9;
+}
+
+.contact-grid{
+  width:min(1050px,100%);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:32px;
+}
+
+.contact-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:22px;
+  text-align:center;
+}
+
+.contact-box h4{
+  margin-bottom:8px;
+  font-size:1.06rem;
+}
+
+.contact-box p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:0.96rem;
+  word-break:break-word;
+}
+
+footer{
+  padding:20px;
+  text-align:center;
+  color:var(--muted);
+  opacity:0.8;
+  border-top:1px solid rgba(255,255,255,0.08);
+  background:rgba(15,23,42,0.45);
+  backdrop-filter:blur(10px);
+}
+
+@media(max-width: 992px){
+  .hero-wrap,
+  .info-grid,
+  .skills-grid,
+  .contact-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-left{
+    text-align:center;
+  }
+
+  .hero p{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-actions{
+    justify-content:center;
+  }
+
+  .timeline-item{
+    grid-template-columns:1fr;
+  }
+
+  .nav-title{
+    max-width:50%;
+  }
+}
+
+@media(max-width: 768px){
+  nav ul{
+    width:220px;
+    height:auto;
+    max-height:70vh;
+    overflow:auto;
+  }
+
+  .hero{
+    padding-top:120px;
+  }
+
+  section{
+    padding:110px 16px 70px;
+  }
+
+  .profile-card{
+    width:100%;
+    max-width:340px;
+  }
+
+  .photo-frame{
+    width:140px;
+    height:170px;
+  }
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<nav>
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+  </div>
+  <h1 class="nav-title">Umesh Khola</h1>
+  <div class="menu-toggle" id="menu-toggle" onclick="toggleMenu()"></div>
+  <ul id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#personal">Personal</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#strengths">Strengths</a></li>
+    <li><a href="#declaration">Declaration</a></li>
+    <li><a href="#resume">Resume</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+  
+<main>
+  <section id="home" class="hero">
+    <div class="hero-wrap">
+      <div class="hero-left">
+        <span class="hero-badge">Student • Computer Applications • Haryana</span>
+        <h2 class="gradient-text">Hi, I’m Umesh Khola</h2>
+        <p>
+          I am a student who wants to work with an organization that can provide me
+          constant learning and help me enhance my professional ability in technical
+          and analytical skills.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn">Contact Me</a>
+          <a href="#education" class="btn secondary">View Education</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="profile-card">
+          <div class="photo-frame">
+            <img src="photo.png" alt="Umesh Khola Photo">
+          </div>
+          <div class="profile-name">Umesh Khola</div>
+          <div class="profile-role">Student</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title gradient-text">About Me</h2>
+    <p class="section-subtitle">
+      I am a student focused on learning, improving computer skills, and building a strong
+      foundation for my professional future. I believe in honesty, confidence, and a positive work attitude.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Profile Summary</h3>
+        <p>
+          To work with an organization which can provide me constant learning and enhance my professional
+          ability in terms of technical and analytical skills.
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3>Personal Snapshot</h3>
+        <ul class="detail-list">
+          <li><strong>Date of Birth:</strong> 31/12/2006</li>
+          <li><strong>Marital Status:</strong> Unmarried</li>
+          <li><strong>Gender:</strong> Male</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="personal">
+    <h2 class="section-title gradient-text">Personal Details</h2>
+    <p class="section-subtitle">
+      Here you can find my Basic information about me.
+    </p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Address</h3>
+        <p>
+          H.No: 187/1, Vill: Masit, Tehsil: Dahina, Post Office: Rampuri,
+          DIST: Rewari, State: Haryana
+        </p>
+      </div>
+
+      <div class="info-card">
+        <h3>Languages Known</h3>
+        <ul class="detail-list">
+          <li>Basic English</li>
+          <li>Hindi</li>
+          <li>Local Haryanvi</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="info-grid" style="margin-top:18px;">
+      <div class="info-card">
+        <h3>Contact Information</h3>
+        <ul class="detail-list">
+          <li><strong>Email:</strong> umeshkhola9@gmail.com</li>
+          <li><strong>Phone:</strong> 7027221321</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3>Hobbies</h3>
+        <p>Learning new things.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title gradient-text">Educational Qualification</h2>
+    <p class="section-subtitle">
+      Here you can find information about my studies and academic background.
+    </p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <div class="timeline-content">
+          <h4>Diploma in Computer Application</h4>
+          <p>Haryana State Electronics Development Corporation Limited</p>
+          <p><strong>Percentage:</strong> 72.3%</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2024</div>
+        <div class="timeline-content">
+          <h4>12th, CBSE</h4>
+          <p><strong>Percentage:</strong> 76.2%</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <div class="timeline-content">
+          <h4>10th, CBSE</h4>
+          <p><strong>Percentage:</strong> 66.4%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title gradient-text">Skills & Qualification</h2>
+    <p class="section-subtitle">
+      This section gives information about my skills and knowledge.
+    </p>
+
+    <div class="skills-grid">
+      <div class="skill-box">
+        <h4>Computer Knowledge</h4>
+        <p>Knowledge of basic computer operations and day-to-day usage.</p>
+      </div>
+
+      <div class="skill-box">
+        <h4>Microsoft Office</h4>
+        <p>
+          Familiar in using MS Word, MS Excel, and MS PowerPoint for basic document creation,
+          data entry, and presentations.
+        </p>
+      </div>
+
+      <div class="skill-box">
+        <h4>Communication</h4>
+        <p>Basic English communication skills in both verbal and written form.</p>
+      </div>
+
+      <div class="skill-box">
+        <h4>System Operations</h4>
+        <p>Basic computer operations including Windows OS and file management.</p>
+      </div>
+
+      <div class="skill-box">
+        <h4>Office Tools</h4>
+        <p>Microsoft Office tools at a basic level: Word, Excel, and PowerPoint.</p>
+      </div>
+
+      <div class="skill-box">
+        <h4>Learning Attitude</h4>
+        <p>Always ready to learn and adapt to new tools, tasks, and environments.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="strengths">
+    <h2 class="section-title gradient-text">Strengths</h2>
+    <p class="section-subtitle">
+      This section shows my positive qualities and abilities.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Smart Worker</h3>
+        <p style="margin-top:12px; color:var(--muted); line-height:1.7;">I work smart and focus on completing tasks efficiently.</p>
+      </div>
+
+      <div class="card">
+        <h3>Confident</h3>
+        <p style="margin-top:12px; color:var(--muted); line-height:1.7;">I stay confident while learning and facing new challenges.</p>
+      </div>
+
+      <div class="card">
+        <h3>Honest</h3>
+        <p style="margin-top:12px; color:var(--muted); line-height:1.7;">I believe in honesty, decency, and genuine work ethics.</p>
+      </div>
+
+      <div class="card">
+        <h3>Quick Learner</h3>
+        <p style="margin-top:12px; color:var(--muted); line-height:1.7;">I am ready to learn and take up new responsibilities.</p>
+      </div>
+
+      <div class="card">
+        <h3>Good Communication</h3>
+        <p style="margin-top:12px; color:var(--muted); line-height:1.7;">I can communicate well in basic English, Hindi, and Haryanvi.</p>
+      </div>
+
+      <div class="card">
+        <h3>Positive Work Attitude</h3>
+        <p style="margin-top:12px; color:var(--muted); line-height:1.7;">I stay positive, well-planned, and try to complete work on time with perfection.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="declaration">
+    <h2 class="section-title gradient-text">Declaration</h2>
+    <div class="declaration">
+  <p>
+    I confirm that the information given in this resume is genuine and accurate to the best of my knowledge.
+  </p>
+<div class="signature-block">
+<p class="sign-name">— Umesh Khola</p>
+</div>      
+</div>
+  </section>
+
+  <section id="resume">
+  <h2 class="section-title gradient-text">My Resume</h2>
+  <p class="section-subtitle">
+    You can view my resume below.
+  </p>
+
+ <div class="hero-actions" style="margin-top:30px;">
+  <a href="Resume.pdf" target="_blank" class="btn">
+  📄 View Resume
+</a>
+</div>
+</section>
+  
+  <section id="contact">
+    <h2 class="section-title gradient-text">Contact</h2>
+    <p class="section-subtitle">
+      You can use this section to reach me directly through email or phone.
+    </p>
+
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h4>Email</h4>
+        <p>umeshkhola9@gmail.com</p>
+      </div>
+
+      <div class="contact-box">
+        <h4>Phone</h4>
+        <p>7027221321</p>
+      </div>
+
+      <div class="contact-box">
+        <h4>Location</h4>
+        <p>Rewari, Haryana, India</p>
+      </div>
+    </div>
+
+    <div class="hero-actions" style="margin-top:30px; justify-content:center;">
+      <a class="btn" href="mailto:umeshkhola9@gmail.com">Send Email</a>
+      <a class="btn secondary" href="tel:7027221321">Call Now</a>
+    </div>
+  </section>
+</main>
+
+<footer>© Umesh Khola • Resume Website</footer>
+
+<script>
+document.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+});
+document.addEventListener("dragstart", function(e) {
+  if (e.target.tagName === "IMG") {
+    e.preventDefault();
+  }
+});
+function toggleMenu(){
+  const nav = document.getElementById("nav-links");
+  const toggle = document.getElementById("menu-toggle");
+  const items = document.querySelectorAll("#nav-links li");
+
+  nav.classList.toggle("active");
+  toggle.classList.toggle("active");
+
+  if(nav.classList.contains("active")){
+    items.forEach((item,index)=>{
+      setTimeout(()=>item.classList.add("show"), index*120);
+    });
+  } else {
+    items.forEach(item=>item.classList.remove("show"));
+  }
+}
+
+const sections = document.querySelectorAll("section");
+function reveal(){
+  sections.forEach(sec=>{
+    if(sec.getBoundingClientRect().top < window.innerHeight - 110){
+      sec.classList.add("show");
+    }
+  });
+}
+  
+const navLinks = document.querySelectorAll("#nav-links a");
+
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    document.getElementById("nav-links").classList.remove("active");
+    document.getElementById("menu-toggle").classList.remove("active");
+
+    const items = document.querySelectorAll("#nav-links li");
+    items.forEach(item => item.classList.remove("show"));
+  });
+});
+  
+window.addEventListener("scroll", reveal);
+window.addEventListener("load", reveal);
+</script>
+
+</body>
+</html>

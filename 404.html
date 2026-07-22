@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 error</title>
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: black;
+        color: #ff0000;
+        font-family: "Courier New", monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 600px;
+    }
+
+    h1 {
+        font-size: clamp(60px, 15vw, 120px);
+        margin: 0;
+        position: relative;
+        animation: glitch 1s infinite;
+    }
+
+    h1::before, h1::after {
+        content: "404";
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+
+    h1::before {
+        color: #00fff9;
+        animation: glitchTop 1s infinite;
+    }
+
+    h1::after {
+        color: #ff00c1;
+        animation: glitchBottom 1s infinite;
+    }
+
+    h2 {
+        margin-top: -10px;
+        letter-spacing: 3px;
+        font-size: clamp(16px, 4vw, 24px);
+        animation: flicker 2s infinite;
+    }
+
+    p {
+        color: #bbb;
+        font-size: clamp(12px, 3vw, 16px);
+        margin-top: 20px;
+        animation: flicker 3s infinite;
+        line-height: 1.5;
+    }
+
+    .warning {
+        margin-top: 25px;
+        color: red;
+        font-weight: bold;
+        font-size: clamp(14px, 3.5vw, 18px);
+        animation: blink 1s infinite;
+    }
+
+    a {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 12px 24px;
+        border: 1px solid red;
+        color: red;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: clamp(12px, 3vw, 16px);
+    }
+
+    a:hover {
+        background: red;
+        color: black;
+        box-shadow: 0 0 15px red;
+    }
+
+    /* Animations */
+
+    @keyframes glitch {
+        0% { transform: translate(0); }
+        20% { transform: translate(-3px, 3px); }
+        40% { transform: translate(-3px, -3px); }
+        60% { transform: translate(3px, 3px); }
+        80% { transform: translate(3px, -3px); }
+        100% { transform: translate(0); }
+    }
+
+    @keyframes glitchTop {
+        0% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+        50% { clip-path: inset(0 0 60% 0); transform: translate(2px, 2px); }
+        100% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+    }
+
+    @keyframes glitchBottom {
+        0% { clip-path: inset(80% 0 0 0); transform: translate(2px, 2px); }
+        50% { clip-path: inset(60% 0 0 0); transform: translate(-2px, -2px); }
+        100% { clip-path: inset(80% 0 0 0); transform: translate(2px, 2px); }
+    }
+
+    @keyframes flicker {
+        0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+        20%, 24%, 55% { opacity: 0; }
+    }
+
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+
+    /* Background noise */
+    body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+        opacity: 0.2;
+        pointer-events: none;
+    }
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>404</h1>
+    <h2>ACCESS DENIED</h2>
+
+    <p>
+        You were not supposed to be here...<br>
+        This page has been corrupted or erased.
+    </p>
+
+    <div class="warning">
+        ⚠ SYSTEM DETECTED UNAUTHORIZED ACCESS ⚠
+    </div>
+
+    <p>
+        Tracking signal initialized...<br>
+        Please leave immediately.
+    </p>
+
+    <a href="https://khola.liveblog365.com">RETURN TO SAFETY</a>
+</div>
+
+</body>
+</html>

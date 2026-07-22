@@ -1,0 +1,22 @@
+# Custom 404 Not Found Error Page
+ErrorDocument 404 /404.html
+
+RewriteEngine On
+
+# Remove query strings
+RewriteCond %{QUERY_STRING} .+
+RewriteRule ^ %{REQUEST_URI}? [R=301,L]
+
+# Remove trailing slash (except root)
+RewriteCond %{REQUEST_URI} .+/$
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Remove .html from URL
+RewriteCond %{THE_REQUEST} \s/([^.]+)\.html [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Internally map clean URL to .html file
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L]
