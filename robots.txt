@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://khola.dpdns.org/sitemap.xml
